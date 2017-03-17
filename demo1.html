@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>本地存储</title>
+</head>
+<body>
+	<input id="btn" type="button" value="请求位置信息">
+	<textarea id="text" style="width:300px;height: 400px;border: 1px solid #000;"></textarea>
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementById('btn');
+			var oTex = document.getElementById('text');
+			oBtn.onclick = function(){
+				navigator.geolocation.getCurrentPosition(function(position){
+					oTex.value+="经度"+position.coords.longitude+'\n';
+					oTex.value+="纬度"+position.coords.latitude+'\n';
+					oTex.value+="准确度 "+position.coords.accuracy+'\n';
+					oTex.value+="海拔"+position.coords.altitudeAcuracy+'\n';
+					oTex.value+="海拔准确度"+position.coords.heading+'\n';
+					oTex.value+="行进方向"+position.coords.speed+'\n';
+				},function(err){
+					//err.code // 失败所对应的编号
+					alert( err.code );
+				});
+			}
+		}
+	</script>
+</body>
+</html>

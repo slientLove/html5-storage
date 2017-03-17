@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>本地存储</title>
+</head>
+<body>
+	<label>用户名：</label><input type="text" value="">
+	<label>密码：</label><input type="password" value="">
+	<input type="radio" value="男" name="sex">男
+	<input type="radio" value="女" name="sex">女
+	<textarea id="area" style="width: 200px;height: 200px;border: 1px solid #000;">
+	</textarea>
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementsByTagName('input');
+			var oText = document.getElementById('area');
+
+		// 当打开一个网页，首先检查是否存储有值，如果有值就进行还原
+			if(window.localStorage.getItem("name")){
+				oBtn[0].value = window.localStorage.getItem("name");
+			};
+			if(window.localStorage.getItem("pass")){
+				oBtn[1].value = window.localStorage.getItem("pass");
+			};
+			if(window.localStorage.getItem("sex")){
+				for(var i=0;i<oBtn.length;i++){
+					if(oBtn[i].value==window.localStorage.getItem("sex")){
+						oBtn[i].checked = true;
+					}
+				}
+			};
+
+			if(window.localStorage.getItem("text")){
+				oText.value = window.localStorage.getItem("text");
+			};
+
+	// 如果用户填入了值，就进行存储，比起cookie空间更加大
+
+	        // 当用户关闭页面，退出时会触发	onunload()事件
+			window.onunload = function(){
+				if(oBtn[0].value){
+					window.localStorage.setItem("name",oBtn[0].value);
+				};
+				if(oBtn[1].value){
+					window.localStorage.setItem("pass",oBtn[1].value);
+				};
+				for(var i=0;i<oBtn.length;i++){
+					if(oBtn[i].checked==true){
+						window.localStorage.setItem("sex",oBtn[i].value);
+					}
+				}
+				if(oText.value){
+					window.localStorage.setItem("text",oText.value);
+				}
+			};
+		};
+	</script>
+</body>
+</html>

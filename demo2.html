@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>本地存储</title>
+</head>
+<body>
+	<input type="button" value="设置值">
+	<input type="button" value="显示值">
+	<input type="button" value="取消值">
+	<input type="text">
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementsByTagName('input');
+			oBtn[0].onclick = function(){
+				//sessionStorage : 临时性存储
+				//localStorage : 永久性存储,关闭页面后还是会保存起来
+		
+				//window.sessionStorage.setItem('name',aInput[3].value);
+				window.localStorage.setItem('text',oBtn[3].value);
+			};
+			oBtn[1].onclick = function(){
+				var oText = window.localStorage.getItem("text");
+				alert(oText);
+			};
+			oBtn[2].onclick = function(){
+				window.localStorage.removeItem("text");
+			}
+		}
+	</script>
+</body>
+</html>
